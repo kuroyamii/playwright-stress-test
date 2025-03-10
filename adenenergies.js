@@ -6,17 +6,37 @@ const path = require("path");
 
 // Base domains with their subpaths
 const domains = {
-  "https://adenenergies.com": [
-    "/about",
-    "/solutions",
+  // "https://adenenergies.com": [
+  //   "/about",
+  //   "/solutions",
+  //   "/media",
+  //   "/contact",
+  //   "/zh",
+  //   "/zh/about",
+  //   "/zh/solutions",
+  //   "/zh/media",
+  //   "/zh/contact",
+  // ],
+  "https://adengroup.com": [
+    "/about-us",
+    "/sustainability",
+    "/career",
     "/media",
     "/contact",
-    "/zh",
-    "/zh/about",
-    "/zh/solutions",
-    "/zh/media",
-    "/zh/contact",
+    "/cn/",
+    "/cn/about-us",
+    "/cn/sustainability",
+    "/cn/career",
+    "/cn/media",
+    "/cn/contact",
   ],
+  // "https://nx-park.com": [
+  //   "/news/?lang=en",
+  //   "/contact/?lang=en",
+  //   "/?lang=cn",
+  //   "/news/?lang=cn",
+  //   "/contact/?lang=cn",
+  // ],
 };
 
 // Browsers to test
@@ -24,7 +44,7 @@ const browsers = [{ name: "Chromium", launcher: chromium }];
 
 // Test configuration
 const MIN_USERS = 20; // Starting number of concurrent users
-const MAX_USERS = 500; // Maximum number of concurrent users to test
+const MAX_USERS = 1000; // Maximum number of concurrent users to test
 const STEP_SIZE = 20; // How many users to add in each step
 const USER_DELAY_MIN = 200; // Min delay between user actions in ms
 const USER_DELAY_MAX = 1000; // Max delay between user actions in ms
@@ -33,9 +53,9 @@ const THRESHOLD_RESPONSE = 60000; // Response time threshold in ms
 
 // Results tracking
 let resultsPerStep = [];
-
+let keys = Object.keys(domains);
 // Initialize test directories
-const TEST_DIR = "stress_test_results";
+const TEST_DIR = `stress_test_results_${keys[0].replace("https://", "")}`;
 if (!fs.existsSync(TEST_DIR)) {
   fs.mkdirSync(TEST_DIR);
 }
